@@ -5,10 +5,10 @@ const categories = ['All', 'Hot', 'Cold', 'Desserts'];
 const items = [
   {
     id: 1,
-    name: 'Angel',
+    name: 'Cappuccino Viennois',
     category: 'Hot',
     desc: 'Sweetness overdose + honey and a cherry on top.',
-    price: '∞ MAD',
+    price: '26 DH',
     image: 'https://github.com/ziaservices/Cappucino/blob/main/src/components/angel.jpg?raw=true',
     tag: 'Best Seller',
   },
@@ -76,30 +76,7 @@ import { useState } from 'react';
 
 export default function Menu() {
   const [active, setActive] = useState('All');
-  const [showAngelMessage, setShowAngelMessage] = useState(false);
-  const [showCloseButton, setShowCloseButton] = useState(false);
-  const [closeAttempts, setCloseAttempts] = useState(0);
-  const [currentMessage, setCurrentMessage] = useState("YOU CAN'T BUY IT IT'S MINE");
-  const [buttonPosition, setButtonPosition] = useState({ top: '50%', left: '50%' });
-  const [buttonDisabled, setButtonDisabled] = useState(false);
   const heading = useScrollAnimation();
-
-  const playSound = () => {
-    const sirenUrl = 'https://cdn.pixabay.com/download/audio/2026/04/16/audio_2655b1d9be.mp3?filename=dogwolf123-bird-angry-screech-scream-call-520671.mp3'; // Replace with your desired siren sound URL
-    const audio = new Audio(sirenUrl);
-    audio.play();
-  };
-
-  const handleAngelClick = () => {
-    setShowAngelMessage(true);
-    setShowCloseButton(false);
-    setCloseAttempts(0);
-    setCurrentMessage("YOU CAN'T BUY IT IT'S MINE");
-    setButtonPosition({ top: '50%', left: '50%' });
-    setButtonDisabled(false);
-    playSound();
-    setTimeout(() => setShowCloseButton(true), 1500);
-  };
 
   const filtered = active === 'All' ? items : items.filter(i => i.category === active);
 
@@ -142,7 +119,7 @@ export default function Menu() {
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filtered.map((item, i) => (
-            <MenuCard key={item.id} item={item} delay={i * 80} onAngelClick={handleAngelClick} />
+            <MenuCard key={item.id} item={item} delay={i * 80} />
           ))}
         </div>
 
@@ -158,66 +135,17 @@ export default function Menu() {
           </a>
         </div>
       </div>
-
-      {/* Angel Message Modal */}
-      <div
-        className={`fixed inset-0 bg-black flex items-center justify-center z-50 ${
-          showAngelMessage ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="w-full h-full bg-cream dark:bg-espresso relative flex flex-col items-center justify-center p-8">
-          <p className="text-4xl md:text-6xl font-bold text-espresso dark:text-cream text-center mb-8">
-            {currentMessage}
-          </p>
-          {showCloseButton && (
-            <button
-              onClick={() => {
-                if (buttonDisabled) return;
-                setButtonDisabled(true);
-                setCloseAttempts(prev => {
-                  const newAttempts = prev + 1;
-                  if (newAttempts === 4) {
-                    setShowAngelMessage(false);
-                  } else if (newAttempts === 3) {
-                    setCurrentMessage("UNDERSTOOD ?? SHE'S MINE");
-                  }
-                  const randomTop = Math.random() < 0.5 ? Math.random() * 30 + 10 : Math.random() * 30 + 60;
-                  const randomLeft = Math.random() < 0.5 ? Math.random() * 30 + 10 : Math.random() * 30 + 60;
-                  setButtonPosition({
-                    top: `${randomTop}%`,
-                    left: `${randomLeft}%`
-                  });
-                  setTimeout(() => setButtonDisabled(false), 1000);
-                  return newAttempts;
-                });
-              }}
-              disabled={buttonDisabled}
-              className={`absolute px-8 py-4 bg-amber text-cream rounded-full font-medium hover:bg-amber/80 transition-colors text-xl ${
-                buttonDisabled ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
-              style={{ top: buttonPosition.top, left: buttonPosition.left, transform: 'translate(-50%, -50%)' }}
-            >
-              Close
-            </button>
-          )}
-        </div>
-      </div>
     </section>
   );
 }
 
-function MenuCard({ item, delay, onAngelClick }: { item: typeof items[0]; delay: number; onAngelClick: () => void }) {
+function MenuCard({ item, delay }: { item: typeof items[0]; delay: number }) {
   const { ref, visible } = useScrollAnimation();
 
   return (
     <div
       ref={ref}
-      onClick={() => {
-        if (item.name === 'Angel') {
-          onAngelClick();
-        }
-      }}
-      className={`group bg-cream dark:bg-espresso rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 cursor-pointer ${
+      className={`group bg-cream dark:bg-espresso rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
       style={{ transitionDelay: `${delay}ms` }}
