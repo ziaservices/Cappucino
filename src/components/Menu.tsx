@@ -9,7 +9,7 @@ const items = [
     category: 'Hot',
     desc: 'Sweetness overdose + honey and a cherry on top.',
     price: '26 DH',
-    image: 'https://github.com/ziaservices/Cappucino/blob/main/src/components/angel.jpg?raw=true',
+    image: 'https://imgs.search.brave.com/d90_n4RuLQREg7qz0wjForu1y0G59C_GtFVIM95xleo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/Y3Vpc2luZWF6LmNv/bS82NjB4NDk1LzIw/MTUvMDQvMjcvaTEx/Mzc3NS1jYWZlLXZp/ZW5ub2lzLmpwZw',
     tag: 'Best Seller',
   },
   {
