@@ -5,11 +5,11 @@ const categories = ['All', 'Hot', 'Cold', 'Desserts'];
 const items = [
   {
     id: 1,
-    name: 'Signature Cappuccino',
+    name: 'Angel',
     category: 'Hot',
-    desc: 'Velvety steamed milk over a double shot of our house espresso blend.',
-    price: '35 MAD',
-    image: 'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=600&q=80',
+    desc: 'Sweetness overdose + honey and a cherry on top.',
+    price: '∞ MAD',
+    image: 'https://github.com/ziaservices/Cappucino/blob/main/src/components/angel.jpg?raw=true',
     tag: 'Best Seller',
   },
   {
